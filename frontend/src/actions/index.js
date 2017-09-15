@@ -1,24 +1,5 @@
-export const SET_CATEGORIES = "SET_CATEGORIES";
-export const SET_POSTS = "SET_POSTS";
-export const SET_COMMENTS = "SET_COMMENTS";
+import * as postsActions from './posts';
+import * as categoriesActions from './categories';
+import * as commentsActions from './comments';
 
-export function setCategories (categories) {
-  return {
-    type: SET_CATEGORIES,
-    categories
-  }
-}
-
-export function setPosts (posts) {
-  return {
-    type: SET_POSTS,
-    posts
-  }
-}
-
-export function setComments (comments) {
-  return {
-    type: SET_COMMENTS,
-    comments
-  }
-}
+export  { postsActions, categoriesActions, commentsActions };
