@@ -12,10 +12,10 @@ export function setComments (comments) {
   }
 }
 
-export function addComment (post) {
+export function addComment (comment) {
   return {
     type: ADD_COMMENT,
-    post
+    comment
   }
 }
 
