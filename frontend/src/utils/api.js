@@ -5,7 +5,6 @@ const headers = { 'Authorization': authToken };
 export const getCategories = () => fetch(`${apiBaseUrl}/categories`, { headers })
   .then((res) => res.json());
 
-
 export const getPosts = (category) => {
   const url = category ? `${apiBaseUrl}/${category}/posts` : `${apiBaseUrl}/posts`;
   return fetch(url, { headers })
