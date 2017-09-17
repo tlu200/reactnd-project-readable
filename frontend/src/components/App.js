@@ -34,7 +34,7 @@ class App extends Component {
               <Nav>
                 {categories.map((category) => {
                   return (
-                    <LinkContainer to={`/${category.path}`} key={category.name}>
+                    <LinkContainer to={`/category/${category.path}`} key={category.name}>
                       <NavItem>
                         {category.name}
                       </NavItem>
@@ -53,7 +53,7 @@ class App extends Component {
 
           {categories.map((category) => {
             return (
-              <Route path={`/${category.path}`} key={category.name} render={() => {
+              <Route exact path={`/category/${category.path}`} key={category.name} render={() => {
                 return (
                   <PostList posts={posts.filter((post) => post.category === category.name)}></PostList>
                 );
