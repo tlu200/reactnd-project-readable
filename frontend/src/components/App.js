@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Grid, Row, Nav, Navbar, NavItem } from 'react-bootstrap';
+import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { categoriesActions, postsActions } from '../actions';
 import * as API from '../utils/api';
+import PostList from './PostList';
 
 class App extends Component {
   componentDidMount () {
@@ -18,47 +21,48 @@ class App extends Component {
   render() {
     const { categories = [], posts = [] } = this.props;
     return (
-      <div>
-        <Navbar>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <a href="#">Readable</a>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-            <Nav>
-              {categories.map((category) => {
+      <BrowserRouter>
+        <div>
+          <Navbar>
+            <Navbar.Header>
+              <Navbar.Brand>
+                <Link to="/">Readable</Link>
+              </Navbar.Brand>
+              <Navbar.Toggle />
+            </Navbar.Header>
+            <Navbar.Collapse>
+              <Nav>
+                {categories.map((category) => {
+                  return (
+                    <LinkContainer to={`/${category.path}`} key={category.name}>
+                      <NavItem>
+                        {category.name}
+                      </NavItem>
+                    </LinkContainer>
+                  );
+                })}
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+
+          <Route exact path="/" render={() => {
+            return (
+              <PostList posts={posts}></PostList>
+            );
+          }}/>
+
+          {categories.map((category) => {
+            return (
+              <Route path={`/${category.path}`} key={category.name} render={() => {
                 return (
-                  <NavItem key={category.name}>
-                    {category.name}
-                  </NavItem>
+                  <PostList posts={posts.filter((post) => post.category === category.name)}></PostList>
                 );
-              })}
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
+              }}/>
+            );
+          })}
 
-        <Grid>
-
-          <Row>
-            Posts:
-            <ul>
-              {posts.map((post) => {
-                return <li key={post.id}>{post.title}</li>
-              })}
-            </ul>
-          </Row>
-          <Row>
-            Categories:
-            <ul>
-              {categories.map((category, index) => {
-                return <li key={index}>{category.name}</li>
-              })}
-            </ul>
-          </Row>
-        </Grid>
-      </div>
+        </div>
+      </BrowserRouter>
     );
   }
 }
