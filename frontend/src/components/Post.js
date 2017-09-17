@@ -13,7 +13,7 @@ class Post extends Component {
       <Row>
         <Panel header={post.title} bsStyle="primary">
           {post.body}
-          <Badge pullRight="true">{post.voteScore}</Badge>
+          <Badge pullRight={true}>{post.voteScore}</Badge>
         </Panel>
       </Row>
     );
