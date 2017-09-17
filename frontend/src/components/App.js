@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Row } from 'react-bootstrap';
+import { Grid, Row, Nav, Navbar, NavItem } from 'react-bootstrap';
 import { categoriesActions, postsActions } from '../actions';
 import * as API from '../utils/api';
 
@@ -18,24 +18,47 @@ class App extends Component {
   render() {
     const { categories = [], posts = [] } = this.props;
     return (
-      <Grid>
-        <Row>
-          Posts:
-          <ul>
-            {posts.map((post) => {
-              return <li key={post.id}>{post.title}</li>
-            })}
-          </ul>
-        </Row>
-        <Row>
-          Categories:
-          <ul>
-            {categories.map((category, index) => {
-              return <li key={index}>{category.name}</li>
-            })}
-          </ul>
-        </Row>
-      </Grid>
+      <div>
+        <Navbar>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="#">Readable</a>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav>
+              {categories.map((category) => {
+                return (
+                  <NavItem key={category.name}>
+                    {category.name}
+                  </NavItem>
+                );
+              })}
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+
+        <Grid>
+
+          <Row>
+            Posts:
+            <ul>
+              {posts.map((post) => {
+                return <li key={post.id}>{post.title}</li>
+              })}
+            </ul>
+          </Row>
+          <Row>
+            Categories:
+            <ul>
+              {categories.map((category, index) => {
+                return <li key={index}>{category.name}</li>
+              })}
+            </ul>
+          </Row>
+        </Grid>
+      </div>
     );
   }
 }
