@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Grid, Row } from 'react-bootstrap';
 import { categoriesActions, postsActions } from '../actions';
 import * as API from '../utils/api';
 
@@ -17,24 +18,24 @@ class App extends Component {
   render() {
     const { categories = [], posts = [] } = this.props;
     return (
-      <div>
-        <div>
+      <Grid>
+        <Row>
           Posts:
           <ul>
             {posts.map((post) => {
               return <li key={post.id}>{post.title}</li>
             })}
           </ul>
-        </div>
-        <div>
+        </Row>
+        <Row>
           Categories:
           <ul>
             {categories.map((category, index) => {
               return <li key={index}>{category.name}</li>
             })}
           </ul>
-        </div>
-      </div>
+        </Row>
+      </Grid>
     );
   }
 }
