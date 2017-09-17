@@ -61,6 +61,12 @@ class App extends Component {
             );
           })}
 
+          <Route path="/new-post" render={() => {
+            return (
+              <div>new post</div>
+            );
+          }}/>
+
         </div>
       </BrowserRouter>
     );
