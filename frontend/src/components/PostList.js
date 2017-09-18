@@ -19,7 +19,7 @@ class PostList extends Component {
           );
         })}
         <Row>
-          <LinkContainer to='new-post'>
+          <LinkContainer to='/new-post'>
             <Button bsStyle="primary">Add new post</Button>
           </LinkContainer>
         </Row>
