@@ -1,6 +1,6 @@
 const apiBaseUrl = "http://localhost:3001";
 const authToken = 'myAuthToken';
-const headers = { 'Authorization': authToken };
+const headers = { 'Authorization': authToken, 'Content-Type': 'application/json' };
 
 export const getCategories = () => fetch(`${apiBaseUrl}/categories`, { headers })
   .then((res) => res.json());
@@ -16,13 +16,13 @@ export const getPost  = (id) => fetch(`${apiBaseUrl}/posts/${id}`, { headers })
 
 export const addPost = (post) => fetch(`${apiBaseUrl}/posts`, {
   method: "POST",
-  body: post,
+  body: JSON.stringify(post),
   headers
 }).then((res) => res.json());
 
 export const editPost = (id, changes) => fetch(`${apiBaseUrl}/posts/${id}`, {
   method: "PUT",
-  body: changes,
+  body: JSON.stringify(changes),
   headers
 }).then((res) => res.json());
 
@@ -45,7 +45,7 @@ export const getComment = (commentId) => fetch(`${apiBaseUrl}/${commentId}`, { h
 
 export const addComment = (id, comment) => fetch(`${apiBaseUrl}/comments`, {
   method: "POST",
-  body: comment,
+  body: JSON.stringify(comment),
   headers
 });
 
@@ -57,7 +57,7 @@ export const voteComment  = (commentId, upVote) => fetch(`${apiBaseUrl}/comments
 
 export const editComment = (commentId, changes) => fetch(`${apiBaseUrl}/comments/${commentId}`, {
   method: "PUT",
-  body: changes,
+  body: JSON.stringify(changes),
   headers
 }).then((res) => res.json());
 
