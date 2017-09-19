@@ -1,8 +1,43 @@
 import React, { Component } from 'react';
-import { Grid, Row, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Grid, Row, Button, Form, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { LinkContainer } from 'react-router-bootstrap';
+import sortBy from 'sort-by';
+import { appStateActions } from '../actions';
 import Post from './Post';
+
+const sortByList = [{
+  value: 'timestamp',
+  text: 'Sort by time'
+}, {
+  value: 'title',
+  text: 'Sort by title'
+}, {
+  value: 'voteScore',
+  text: 'Sort by vote score'
+}, {
+  value: 'category',
+  text: 'Sort by category name'
+}, {
+  value: 'author',
+  text: 'Sort by author name'
+}, {
+  value: '-timestamp',
+  text: 'Sort by time(reverse)'
+}, {
+  value: '-title',
+  text: 'Sort by title(reverse)'
+}, {
+  value: '-voteScore',
+  text: 'Sort by vote score(reverse)'
+}, {
+  value: '-category',
+  text: 'Sort by category name(reverse)'
+}, {
+  value: '-author',
+  text: 'Sort by author name(reverse)'
+}];
 
 class PostList extends Component {
   static propTypes = {
@@ -10,10 +45,28 @@ class PostList extends Component {
   };
 
   render() {
-    const { posts } = this.props;
+    const { posts, appState, setPostOrderBy } = this.props;
     return (
       <Grid>
-        {posts.map((post) => {
+        <Row>
+          <Form inline>
+            <FormGroup controlId="formControlsSelect">
+              <ControlLabel>SortBy:</ControlLabel>
+              <FormControl componentClass="select"
+                           value={appState.postOrderBy}
+                           onChange={(e) => {
+                             setPostOrderBy(e.target.value)
+                           }}>
+                {sortByList.map((s) => {
+                  return (
+                    <option value={s.value}>{s.text}</option>
+                  );
+                })}
+              </FormControl>
+            </FormGroup>
+          </Form>
+        </Row>
+        {posts.sort(sortBy(appState.postOrderBy)).map((post) => {
           return (
             <Post key={post.id} post={post}></Post>
           );
@@ -28,4 +81,17 @@ class PostList extends Component {
   }
 }
 
-export default PostList;
+function mapStateToProps ({ appState }) {
+  return { appState };
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    setPostOrderBy: (postOrderBy) => dispatch(appStateActions.setPostOrderBy(postOrderBy)),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PostList);
