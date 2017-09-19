@@ -6,6 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { categoriesActions, postsActions } from '../actions';
 import * as API from '../utils/api';
 import PostList from './PostList';
+import PostForm from './PostForm';
 
 class App extends Component {
   componentDidMount () {
@@ -63,7 +64,7 @@ class App extends Component {
 
           <Route path="/new-post" render={() => {
             return (
-              <div>new post</div>
+              <PostForm></PostForm>
             );
           }}/>
 
