@@ -4,19 +4,14 @@ import { connect } from 'react-redux';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { categoriesActions, postsActions } from '../actions';
-import * as API from '../utils/api';
 import PostList from './PostList';
 import PostForm from './PostForm';
 
 class App extends Component {
   componentDidMount () {
-    const { setCategories, setPosts } = this.props;
-    API.getCategories().then((response) => {
-      setCategories(response.categories);
-    });
-    API.getPosts().then((response) => {
-      setPosts(response);
-    });
+    const { getCategories, getPosts } = this.props;
+    getCategories();
+    getPosts();
   }
 
   render() {
@@ -80,8 +75,8 @@ function mapStateToProps ({ categories, posts }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    setCategories: (data) => dispatch(categoriesActions.setCategories(data)),
-    setPosts: (data) => dispatch(postsActions.setPosts(data))
+    getCategories: () => dispatch(categoriesActions.getCategories()),
+    getPosts: () => dispatch(postsActions.getPosts()),
   }
 }
 
