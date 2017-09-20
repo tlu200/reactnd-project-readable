@@ -6,6 +6,7 @@ import NavigationBar from './NavigationBar';
 import DefaultPage from './DefaultPage';
 import CategoryView from './CategoryView';
 import PostForm from './PostForm';
+import PostDetail from './PostDetail';
 
 class App extends Component {
   componentDidMount () {
@@ -23,6 +24,8 @@ class App extends Component {
           <Route exact path="/" component={DefaultPage}/>
 
           <Route exact path="/category/:category" component={CategoryView}/>
+
+          <Route exact path="/post/:postId" component={PostDetail}/>
 
           <Route path="/new-post" component={PostForm}/>
 
