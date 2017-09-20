@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { categoriesActions, postsActions } from '../actions';
-import PostList from './PostList';
+import DefaultPage from './DefaultPage';
+import CategoryView from './CategoryView';
 import PostForm from './PostForm';
 
 class App extends Component {
@@ -15,7 +16,7 @@ class App extends Component {
   }
 
   render() {
-    const { categories = [], posts = [] } = this.props;
+    const { categories = [] } = this.props;
     return (
       <BrowserRouter>
         <div>
@@ -41,27 +42,11 @@ class App extends Component {
             </Navbar.Collapse>
           </Navbar>
 
-          <Route exact path="/" render={() => {
-            return (
-              <PostList posts={posts}></PostList>
-            );
-          }}/>
+          <Route exact path="/" component={DefaultPage}/>
 
-          {categories.map((category) => {
-            return (
-              <Route exact path={`/category/${category.path}`} key={category.name} render={() => {
-                return (
-                  <PostList posts={posts.filter((post) => post.category === category.name)}></PostList>
-                );
-              }}/>
-            );
-          })}
+          <Route exact path="/category/:category" component={CategoryView}/>
 
-          <Route path="/new-post" render={() => {
-            return (
-              <PostForm></PostForm>
-            );
-          }}/>
+          <Route path="/new-post" component={PostForm}/>
 
         </div>
       </BrowserRouter>
@@ -69,8 +54,8 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ categories, posts }) {
-  return { categories, posts };
+function mapStateToProps ({ categories }) {
+  return { categories };
 }
 
 function mapDispatchToProps (dispatch) {
