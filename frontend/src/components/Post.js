@@ -15,13 +15,16 @@ class Post extends Component {
         <Panel header={post.title} bsStyle="primary">
           <div>
             {post.body}
-            <Badge pullRight={true}>{post.voteScore}</Badge>
           </div>
           <hr/>
 
-          <LinkContainer to={`/post/${post.id}`}>
-            <Button bsStyle="primary">View detail</Button>
-          </LinkContainer>
+          <div>
+            <LinkContainer to={`/post/${post.id}`}>
+              <Button bsStyle="primary">View detail</Button>
+            </LinkContainer>
+            <Badge pullRight={true}>{post.voteScore}</Badge>
+          </div>
+
         </Panel>
       </Row>
     );
