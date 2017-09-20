@@ -57,9 +57,9 @@ class PostList extends Component {
                            onChange={(e) => {
                              setPostOrderBy(e.target.value)
                            }}>
-                {sortByList.map((s) => {
+                {sortByList.map((s, i) => {
                   return (
-                    <option value={s.value}>{s.text}</option>
+                    <option value={s.value} key={i}>{s.text}</option>
                   );
                 })}
               </FormControl>
