@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Row, Panel, Badge } from 'react-bootstrap';
+import { Row, Panel, Badge, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { LinkContainer } from 'react-router-bootstrap';
 
 class Post extends Component {
   static propTypes = {
@@ -12,8 +13,15 @@ class Post extends Component {
     return (
       <Row>
         <Panel header={post.title} bsStyle="primary">
-          {post.body}
-          <Badge pullRight={true}>{post.voteScore}</Badge>
+          <div>
+            {post.body}
+            <Badge pullRight={true}>{post.voteScore}</Badge>
+          </div>
+          <hr/>
+
+          <LinkContainer to={`/post/${post.id}`}>
+            <Button bsStyle="primary">View detail</Button>
+          </LinkContainer>
         </Panel>
       </Row>
     );
