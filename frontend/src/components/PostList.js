@@ -50,7 +50,7 @@ class PostList extends Component {
       <Grid>
         <Row>
           <Form inline>
-            <FormGroup controlId="formControlsSelect">
+            <FormGroup controlId="formControlsSelect" style={{marginBottom: '20px'}}>
               <ControlLabel>SortBy:</ControlLabel>
               <FormControl componentClass="select"
                            value={appState.postOrderBy}
