@@ -17,7 +17,6 @@ class EditPost extends Component {
         author: post.author,
         category: post.category,
         body: post.body,
-        isSaving: false,
         postNotFound: false
       };
     } else {
@@ -52,35 +51,27 @@ class EditPost extends Component {
 
   handleSave() {
     const { id, title, author, category, body } = this.state;
-    const { editPost } = this.props;
+    const { editPost, history } = this.props;
     const changes = {
       title,
       author,
       category,
       body
     };
-    this.setState({isSaving: true});
     API.editPost(id, changes).then((post) => {
       const { id, title, author, category, body } = post;
-      this.setState({
-        id,
-        title,
-        author,
-        category,
-        body,
-        isSaving: false
-      });
       editPost(id, {
         title,
         author,
         category,
         body
       });
+      history.goBack();
     });
   }
 
   render() {
-    const { title, author, category, body, isSaving, postNotFound } = this.state;
+    const { title, author, category, body, postNotFound } = this.state;
     if (postNotFound) {
       return (<div>Post not found</div>);
     }
@@ -89,7 +80,6 @@ class EditPost extends Component {
                 author={author}
                 category={category}
                 body={body}
-                isSaving={isSaving}
                 handleChange={this.handleChange.bind(this)}
                 handleSave={this.handleSave.bind(this)}>
       </PostFrom>

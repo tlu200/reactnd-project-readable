@@ -4,8 +4,8 @@ import { Grid, Row, Button, Form, FormControl, FormGroup, ControlLabel } from 'r
 
 class PostFrom extends Component {
   render() {
-    const { title, author, category, body, isSaving, categories, handleChange, handleSave } = this.props;
-    const enableButton = title && author && category && body && !isSaving;
+    const { title, author, category, body, categories, handleChange, handleSave } = this.props;
+    const enableButton = title && author && category && body;
     return (
       <Grid>
         <Row>
@@ -55,7 +55,7 @@ class PostFrom extends Component {
                       bsStyle="primary"
                       disabled={!enableButton}
                       onClick={() => enableButton ? handleSave() : null}>
-                {isSaving ? "Saving..." : "Save"}
+                Save
               </Button>
             </FormGroup>
           </Form>
