@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Row, Table, ButtonGroup, Button } from 'react-bootstrap';
+import { Grid, Row, ButtonGroup, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { postsActions } from '../actions';
+import { postsActions, commentsActions } from '../actions';
 import * as API from '../utils/api';
-
-const keys = ['id', 'timestamp', 'title', 'body', 'author', 'category', 'voteScore'];
+import PostDetailTable from './PostDetailTable';
 
 class PostDetail extends Component {
   constructor(props) {
@@ -20,8 +19,9 @@ class PostDetail extends Component {
   }
 
   componentDidMount () {
-    const { match } = this.props;
+    const { match, getComments } = this.props;
     const postId = match.params.postId;
+    getComments(postId);
     if(!this.state.post) {
       API.getPost(postId).then((response) => {
         if(response.id) {
@@ -44,53 +44,45 @@ class PostDetail extends Component {
 
   render() {
     const { post } = this.state;
+    const { comments } = this.props;
+
+    if(post) {
+      return (
+        <Grid>
+          <Row>
+            <PostDetailTable post={post} />
+          </Row>
+          <Row>
+            <ButtonGroup>
+              <LinkContainer to={`/edit/${post.id}`}>
+                <Button bsStyle="primary">Edit</Button>
+              </LinkContainer>
+              <Button bsStyle="primary" onClick={() => this.deletePost()}>Delete</Button>
+            </ButtonGroup>
+          </Row>
+          <Row>
+            {JSON.stringify(comments)}
+          </Row>
+        </Grid>
+      );
+    }
 
     return (
-      <Grid>
-        {
-          post ?
-            <Row>
-              <Table>
-                <thead>
-                <tr>
-                  <th>#</th>
-                  <th>value</th>
-                </tr>
-                </thead>
-                <tbody>
-                {keys.map((key) => {
-                  return (
-                    <tr key={key}>
-                      <td>{key}</td>
-                      <td>{key === 'timestamp'? new Date(post[key]).toISOString(): post[key]}</td>
-                    </tr>
-                  );
-                })}
-                </tbody>
-              </Table>
-              <ButtonGroup>
-                <LinkContainer to={`/edit/${post.id}`}>
-                  <Button bsStyle="primary">Edit</Button>
-                </LinkContainer>
-                <Button bsStyle="primary" onClick={() => this.deletePost()}>Delete</Button>
-              </ButtonGroup>
-            </Row> :
-            <Row>
-              No post found
-            </Row>
-        }
-      </Grid>
+      <Row>
+        No post found
+      </Row>
     );
   }
 }
 
-function mapStateToProps ({ posts }) {
-  return { posts };
+function mapStateToProps ({ posts, comments }) {
+  return { posts, comments };
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     deletePost: (id) => dispatch(postsActions.deletePost(id)),
+    getComments: (id) => dispatch(commentsActions.getCommentsByPost(id)),
   }
 }
 
