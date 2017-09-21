@@ -37,7 +37,7 @@ export const votePost = (id, upVote) => fetch(`${apiBaseUrl}/posts/${id}`, {
   headers
 }).then((res) => res.json());
 
-export const getCommentsByPost = (id) => fetch(`${apiBaseUrl}/${id}/comments`, { headers })
+export const getCommentsByPost = (id) => fetch(`${apiBaseUrl}/posts/${id}/comments`, { headers })
   .then((res) => res.json());
 
 export const getComment = (commentId) => fetch(`${apiBaseUrl}/${commentId}`, { headers })
