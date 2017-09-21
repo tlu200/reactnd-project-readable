@@ -5,6 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { postsActions, commentsActions } from '../actions';
 import * as API from '../utils/api';
 import PostDetailTable from './PostDetailTable';
+import CommentList from './CommentList';
 
 class PostDetail extends Component {
   constructor(props) {
@@ -44,14 +45,10 @@ class PostDetail extends Component {
 
   render() {
     const { post } = this.state;
-    const { comments } = this.props;
 
     if(post) {
       return (
         <Grid>
-          <Row>
-            <PostDetailTable post={post} />
-          </Row>
           <Row>
             <ButtonGroup>
               <LinkContainer to={`/edit/${post.id}`}>
@@ -61,8 +58,9 @@ class PostDetail extends Component {
             </ButtonGroup>
           </Row>
           <Row>
-            {JSON.stringify(comments)}
+            <PostDetailTable post={post} />
           </Row>
+          <CommentList />
         </Grid>
       );
     }
@@ -75,8 +73,8 @@ class PostDetail extends Component {
   }
 }
 
-function mapStateToProps ({ posts, comments }) {
-  return { posts, comments };
+function mapStateToProps ({ posts }) {
+  return { posts };
 }
 
 function mapDispatchToProps (dispatch) {
