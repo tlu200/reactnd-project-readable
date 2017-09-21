@@ -7,6 +7,7 @@ import DefaultPage from './DefaultPage';
 import CategoryView from './CategoryView';
 import PostDetail from './PostDetail';
 import NewPost from './NewPost';
+import EditPost from './EditPost';
 
 class App extends Component {
   componentDidMount () {
@@ -28,6 +29,8 @@ class App extends Component {
           <Route exact path="/post/:postId" component={PostDetail}/>
 
           <Route path="/new-post" component={NewPost}/>
+
+          <Route exact path="/edit/:postId" component={EditPost}/>
 
         </div>
       </BrowserRouter>
