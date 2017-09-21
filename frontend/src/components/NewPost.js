@@ -10,8 +10,7 @@ class NewPost extends Component {
     title: "",
     author: "",
     category: "",
-    body: "",
-    isSaving: false
+    body: ""
   };
 
   handleChange(key, event) {
@@ -20,7 +19,7 @@ class NewPost extends Component {
 
   handleSave() {
     const { title, author, category, body } = this.state;
-    const { addPost } = this.props;
+    const { addPost, history } = this.props;
     const post = {
       id: uuid(),
       title,
@@ -29,16 +28,9 @@ class NewPost extends Component {
       body,
       timestamp: Date.now()
     };
-    this.setState({isSaving: true});
     API.addPost(post).then((post) => {
-      this.setState({
-        title: "",
-        author: "",
-        category: "",
-        body: "",
-        isSaving: false
-      });
       addPost(post);
+      history.goBack();
     });
   }
 
