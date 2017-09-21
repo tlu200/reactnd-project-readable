@@ -5,8 +5,8 @@ import { categoriesActions, postsActions } from '../actions';
 import NavigationBar from './NavigationBar';
 import DefaultPage from './DefaultPage';
 import CategoryView from './CategoryView';
-import PostForm from './PostForm';
 import PostDetail from './PostDetail';
+import NewPost from './NewPost';
 
 class App extends Component {
   componentDidMount () {
@@ -27,7 +27,7 @@ class App extends Component {
 
           <Route exact path="/post/:postId" component={PostDetail}/>
 
-          <Route path="/new-post" component={PostForm}/>
+          <Route path="/new-post" component={NewPost}/>
 
         </div>
       </BrowserRouter>
