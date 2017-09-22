@@ -47,7 +47,7 @@ export const addComment = (id, comment) => fetch(`${apiBaseUrl}/comments`, {
   method: "POST",
   body: JSON.stringify(comment),
   headers
-});
+}).then((res) => res.json());
 
 export const voteComment  = (commentId, upVote) => fetch(`${apiBaseUrl}/comments/${commentId}`, {
   method: "POST",

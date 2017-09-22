@@ -60,7 +60,7 @@ class PostDetail extends Component {
           <Row>
             <PostDetailTable post={post} />
           </Row>
-          <CommentList />
+          <CommentList postId={post.id}/>
         </Grid>
       );
     }
