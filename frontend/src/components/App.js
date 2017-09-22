@@ -8,6 +8,7 @@ import CategoryView from './CategoryView';
 import PostDetail from './PostDetail';
 import NewPost from './NewPost';
 import EditPost from './EditPost';
+import CommentModal from './CommentModal';
 
 class App extends Component {
   componentDidMount () {
@@ -31,6 +32,8 @@ class App extends Component {
           <Route path="/new-post" component={NewPost}/>
 
           <Route exact path="/edit/:postId" component={EditPost}/>
+
+          <CommentModal />
 
         </div>
       </BrowserRouter>
