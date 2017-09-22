@@ -53,15 +53,23 @@ export function deletePost (id) {
 }
 
 export function upVotePost (id) {
-  return {
-    type: UP_VOTE_POST,
-    id
-  }
+  return dispatch => (
+    API
+      .votePost(id, true)
+      .then(() => dispatch({
+        type: UP_VOTE_POST,
+        id
+      }))
+  );
 }
 
 export function downVotePost (id) {
-  return {
-    type: DOWN_VOTE_POST,
-    id
-  }
+  return dispatch => (
+    API
+      .votePost(id, true)
+      .then(() => dispatch({
+        type: DOWN_VOTE_POST,
+        id
+      }))
+  );
 }
