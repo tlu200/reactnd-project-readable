@@ -42,10 +42,14 @@ export function editPost (id, changes) {
 }
 
 export function deletePost (id) {
-  return {
-    type: DELETE_POST,
-    id
-  }
+  return dispatch => (
+    API
+      .deletePost(id)
+      .then(post => dispatch({
+        type: DELETE_POST,
+        id
+      }))
+  );
 }
 
 export function upVotePost (id) {

@@ -36,10 +36,7 @@ class PostDetail extends Component {
     const { match, deletePost, history } = this.props;
     const postId = match.params.postId;
     if(postId) {
-      API.deletePost(postId).then((post) => {
-        deletePost(post.id);
-        history.push("/");
-      });
+      deletePost(postId).then(() => history.push("/"));
     }
   }
 
