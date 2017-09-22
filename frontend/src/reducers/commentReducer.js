@@ -10,23 +10,23 @@ function addComment (state, action) {
 }
 
 function editComment (state, action) {
-  return updateItemInArray(state, action.id, comment => {
+  return updateItemInArray(state, action.commentId, comment => {
     return updateObject(comment, action.changes);
   });
 }
 
 function deleteComment (state, action) {
-  return state.filter((comment) => comment.id !== action.id);
+  return state.filter((comment) => comment.commentId !== action.id);
 }
 
 function upVoteComment (state, action) {
-  return updateItemInArray(state, action.id, comment => {
+  return updateItemInArray(state, action.commentId, comment => {
     return updateObject(comment, { voteScore: comment.voteScore + 1})
   });
 }
 
 function downVoteComment (state, action) {
-  return updateItemInArray(state, action.id, comment => {
+  return updateItemInArray(state, action.commentId, comment => {
     return updateObject(comment, { voteScore: comment.voteScore - 1})
   });
 }
