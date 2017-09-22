@@ -57,15 +57,23 @@ export function deleteComment (commentId) {
 }
 
 export function upVoteComment (commentId) {
-  return {
-    type: UP_VOTE_COMMENT,
-    commentId
-  }
+  return dispatch => (
+    API
+      .voteComment(commentId, true)
+      .then(() => dispatch({
+        type: UP_VOTE_COMMENT,
+        commentId
+      }))
+  );
 }
 
 export function downVoteComment (commentId) {
-  return {
-    type: DOWN_VOTE_COMMENT,
-    commentId
-  }
+  return dispatch => (
+    API
+      .voteComment(commentId, false)
+      .then(() => dispatch({
+        type: DOWN_VOTE_COMMENT,
+        commentId
+      }))
+  );
 }

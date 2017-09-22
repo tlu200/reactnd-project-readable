@@ -33,7 +33,7 @@ export const deletePost = (id) => fetch(`${apiBaseUrl}/posts/${id}`, {
 
 export const votePost = (id, upVote) => fetch(`${apiBaseUrl}/posts/${id}`, {
   method: "POST",
-  body: upVote ? "upVote" : "downVote",
+  body: upVote ? JSON.stringify({ option: "upVote" }) : JSON.stringify({ option : "downVote" }),
   headers
 }).then((res) => res.json());
 
@@ -51,7 +51,7 @@ export const addComment = (comment) => fetch(`${apiBaseUrl}/comments`, {
 
 export const voteComment  = (commentId, upVote) => fetch(`${apiBaseUrl}/comments/${commentId}`, {
   method: "POST",
-  body: upVote ? "upVote" : "downVote",
+  body: upVote ? JSON.stringify({ option: "upVote" }) : JSON.stringify({ option : "downVote" }),
   headers
 }).then((res) => res.json());
 

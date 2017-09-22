@@ -4,7 +4,7 @@ import { appStateActions, commentsActions } from '../actions';
 import { ListGroupItem, Badge, ButtonGroup, Button, Glyphicon } from 'react-bootstrap';
 
 function Comment(props) {
-  const { comment, openModal, deleteComment } = props;
+  const { comment, openModal, deleteComment, upVoteComment, downVoteComment } = props;
   return (
     <ListGroupItem>
       <div>
@@ -14,10 +14,10 @@ function Comment(props) {
           <Button bsSize="xsmall" onClick={() => openModal(comment)}>
             <Glyphicon glyph="edit" />
           </Button>
-          <Button bsSize="xsmall">
+          <Button bsSize="xsmall" onClick={() => upVoteComment(comment.id)}>
             <Glyphicon glyph="thumbs-up" />
           </Button>
-          <Button bsSize="xsmall">
+          <Button bsSize="xsmall" onClick={() => downVoteComment(comment.id)}>
             <Glyphicon glyph="thumbs-down" />
           </Button>
           <Button bsSize="xsmall" onClick={() => deleteComment(comment.id)}>
@@ -32,7 +32,9 @@ function Comment(props) {
 function mapDispatchToProps (dispatch) {
   return {
     openModal: (comment) => dispatch(appStateActions.openCommentModal(comment)),
-    deleteComment: (commentId) => dispatch(commentsActions.deleteComment(commentId))
+    deleteComment: (commentId) => dispatch(commentsActions.deleteComment(commentId)),
+    upVoteComment: (commentId) => dispatch(commentsActions.upVoteComment(commentId)),
+    downVoteComment: (commentId) => dispatch(commentsActions.downVoteComment(commentId))
   }
 }
 
