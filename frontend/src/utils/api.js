@@ -1,67 +1,70 @@
-const apiBaseUrl = "http://localhost:3001";
+const apiBaseUrl = process.env.REACT_APP_BACKEND ? process.env.REACT_APP_BACKEND :  "http://localhost:3001";
 const authToken = 'myAuthToken';
 const headers = { 'Authorization': authToken, 'Content-Type': 'application/json' };
+const defaultOptions = {
+  headers,
+};
 
-export const getCategories = () => fetch(`${apiBaseUrl}/categories`, { headers })
+if(process.env.REACT_APP_BACKEND) {
+  defaultOptions.credentials = "include";
+}
+
+function createOption(additionalOptions) {
+  return Object.assign({}, defaultOptions, additionalOptions);
+}
+
+export const getCategories = () => fetch(`${apiBaseUrl}/categories`, defaultOptions)
   .then((res) => res.json());
 
 export const getPosts = (category) => {
   const url = category ? `${apiBaseUrl}/${category}/posts` : `${apiBaseUrl}/posts`;
-  return fetch(url, { headers })
+  return fetch(url, defaultOptions)
     .then((res) => res.json())
 };
 
-export const getPost  = (id) => fetch(`${apiBaseUrl}/posts/${id}`, { headers })
+export const getPost  = (id) => fetch(`${apiBaseUrl}/posts/${id}`, defaultOptions)
   .then((res) => res.json());
 
-export const addPost = (post) => fetch(`${apiBaseUrl}/posts`, {
+export const addPost = (post) => fetch(`${apiBaseUrl}/posts`, createOption({
   method: "POST",
   body: JSON.stringify(post),
-  headers
-}).then((res) => res.json());
+})).then((res) => res.json());
 
-export const editPost = (id, changes) => fetch(`${apiBaseUrl}/posts/${id}`, {
+export const editPost = (id, changes) => fetch(`${apiBaseUrl}/posts/${id}`, createOption({
   method: "PUT",
   body: JSON.stringify(changes),
-  headers
-}).then((res) => res.json());
+})).then((res) => res.json());
 
-export const deletePost = (id) => fetch(`${apiBaseUrl}/posts/${id}`, {
-  method: "DELETE",
-  headers
-}).then((res) => res.json());
+export const deletePost = (id) => fetch(`${apiBaseUrl}/posts/${id}`, createOption({
+  method: "DELETE"
+})).then((res) => res.json());
 
-export const votePost = (id, upVote) => fetch(`${apiBaseUrl}/posts/${id}`, {
+export const votePost = (id, upVote) => fetch(`${apiBaseUrl}/posts/${id}`, createOption({
   method: "POST",
   body: upVote ? JSON.stringify({ option: "upVote" }) : JSON.stringify({ option : "downVote" }),
-  headers
-}).then((res) => res.json());
+})).then((res) => res.json());
 
-export const getCommentsByPost = (id) => fetch(`${apiBaseUrl}/posts/${id}/comments`, { headers })
+export const getCommentsByPost = (id) => fetch(`${apiBaseUrl}/posts/${id}/comments`, defaultOptions)
   .then((res) => res.json());
 
-export const getComment = (commentId) => fetch(`${apiBaseUrl}/${commentId}`, { headers })
+export const getComment = (commentId) => fetch(`${apiBaseUrl}/${commentId}`, defaultOptions)
   .then((res) => res.json());
 
-export const addComment = (comment) => fetch(`${apiBaseUrl}/comments`, {
+export const addComment = (comment) => fetch(`${apiBaseUrl}/comments`, createOption({
   method: "POST",
   body: JSON.stringify(comment),
-  headers
-}).then((res) => res.json());
+})).then((res) => res.json());
 
-export const voteComment  = (commentId, upVote) => fetch(`${apiBaseUrl}/comments/${commentId}`, {
+export const voteComment  = (commentId, upVote) => fetch(`${apiBaseUrl}/comments/${commentId}`, createOption({
   method: "POST",
   body: upVote ? JSON.stringify({ option: "upVote" }) : JSON.stringify({ option : "downVote" }),
-  headers
-}).then((res) => res.json());
+})).then((res) => res.json());
 
-export const editComment = (commentId, changes) => fetch(`${apiBaseUrl}/comments/${commentId}`, {
+export const editComment = (commentId, changes) => fetch(`${apiBaseUrl}/comments/${commentId}`, createOption({
   method: "PUT",
   body: JSON.stringify(changes),
-  headers
-}).then((res) => res.json());
+})).then((res) => res.json());
 
-export const deleteComment = (commentId) => fetch(`${apiBaseUrl}/comments/${commentId}`, {
-  method: "DELETE",
-  headers
-}).then((res) => res.json());
+export const deleteComment = (commentId) => fetch(`${apiBaseUrl}/comments/${commentId}`, createOption({
+  method: "DELETE"
+})).then((res) => res.json());
