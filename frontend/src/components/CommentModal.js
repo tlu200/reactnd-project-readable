@@ -3,30 +3,22 @@ import { connect } from 'react-redux';
 import { Modal, Button, Form, ControlLabel, FormGroup, FormControl } from 'react-bootstrap';
 import uuid from 'uuid';
 import { appStateActions, commentsActions } from '../actions';
-import * as API from '../utils/api';
 
 class CommentModal extends Component {
   handleSave() {
-    const { appState = {}, updateComment, addComment, closeModal } = this.props;
+    const { appState = {}, editComment, addComment, closeModal } = this.props;
     const { commentFormAuthor, commentFormBody, commentFormId, commentFormParentId } = appState;
     if (commentFormId) {
-      API.editComment(commentFormId, { author: commentFormAuthor, body: commentFormBody })
-        .then((comment) => {
-          updateComment(comment.id, { author: comment.author, body: comment.body });
-        });
+      editComment(commentFormId, { author: commentFormAuthor, body: commentFormBody });
     } else {
-      const comment = {
+      addComment({
         id: uuid(),
         author: commentFormAuthor,
         body: commentFormBody,
         timestamp: Date.now(),
         parentId: commentFormParentId
-      };
-      API.addComment(commentFormParentId, comment)
-        .then((comment) => {
-          addComment(comment);
-          closeModal();
-        });
+      });
+      closeModal();
     }
   }
 
@@ -88,7 +80,7 @@ function mapDispatchToProps (dispatch) {
     closeModal: () => dispatch(appStateActions.closeCommentModal()),
     updateAuthor: (author) => dispatch(appStateActions.setCommentFormAuthor(author)),
     updateBody: (body) => dispatch(appStateActions.setCommentFormBody(body)),
-    updateComment: (id, changes) => dispatch(commentsActions.editComment(id, changes)),
+    editComment: (id, changes) => dispatch(commentsActions.editComment(id, changes)),
     addComment: (comment) => dispatch(commentsActions.addComment(comment))
   }
 }

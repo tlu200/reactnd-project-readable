@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
-import * as API from '../utils/api';
 import { postsActions } from '../actions';
 import PostFrom from './PostForm';
 
@@ -20,18 +19,14 @@ class NewPost extends Component {
   handleSave() {
     const { title, author, category, body } = this.state;
     const { addPost, history } = this.props;
-    const post = {
+    addPost({
       id: uuid(),
       title,
       author,
       category,
       body,
       timestamp: Date.now()
-    };
-    API.addPost(post).then((post) => {
-      addPost(post);
-      history.goBack();
-    });
+    }).then(() => history.goBack());
   }
 
   render() {

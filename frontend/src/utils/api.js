@@ -43,7 +43,7 @@ export const getCommentsByPost = (id) => fetch(`${apiBaseUrl}/posts/${id}/commen
 export const getComment = (commentId) => fetch(`${apiBaseUrl}/${commentId}`, { headers })
   .then((res) => res.json());
 
-export const addComment = (id, comment) => fetch(`${apiBaseUrl}/comments`, {
+export const addComment = (comment) => fetch(`${apiBaseUrl}/comments`, {
   method: "POST",
   body: JSON.stringify(comment),
   headers

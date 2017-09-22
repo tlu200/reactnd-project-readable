@@ -23,10 +23,14 @@ export function setPosts (posts) {
 }
 
 export function addPost (post) {
-  return {
-    type: ADD_POST,
-    post
-  }
+  return dispatch => (
+    API
+      .addPost(post)
+      .then(post => dispatch({
+        type: ADD_POST,
+        post
+      }))
+  );
 }
 
 export function editPost (id, changes) {

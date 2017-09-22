@@ -23,18 +23,26 @@ export function setComments (comments) {
 }
 
 export function addComment (comment) {
-  return {
-    type: ADD_COMMENT,
-    comment
-  }
+  return dispatch => (
+    API
+      .addComment(comment)
+      .then(comment => dispatch({
+        type: ADD_COMMENT,
+        comment
+      }))
+  );
 }
 
 export function editComment (commentId, changes) {
-  return {
-    type: EDIT_COMMENT,
-    commentId,
-    changes
-  }
+  return dispatch => (
+    API
+      .editComment(commentId, changes)
+      .then(comment => dispatch({
+        type: EDIT_COMMENT,
+        commentId,
+        changes
+      }))
+  );
 }
 
 export function deleteComment (commentId) {
