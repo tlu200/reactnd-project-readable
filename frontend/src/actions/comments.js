@@ -38,10 +38,14 @@ export function editComment (commentId, changes) {
 }
 
 export function deleteComment (commentId) {
-  return {
-    type: DELETE_COMMENT,
-    commentId
-  }
+  return dispatch => (
+    API
+      .deleteComment(commentId)
+      .then(comment => dispatch({
+        type: DELETE_COMMENT,
+        commentId
+      }))
+  );
 }
 
 export function upVoteComment (commentId) {
