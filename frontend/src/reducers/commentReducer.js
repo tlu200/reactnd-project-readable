@@ -16,7 +16,7 @@ function editComment (state, action) {
 }
 
 function deleteComment (state, action) {
-  return state.filter((comment) => comment.commentId !== action.id);
+  return state.filter((comment) => comment.id !== action.commentId);
 }
 
 function upVoteComment (state, action) {
