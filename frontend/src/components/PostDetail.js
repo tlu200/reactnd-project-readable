@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, ButtonGroup, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { postsActions, commentsActions } from '../actions';
+import * as postsActions from '../actions/posts';
+import * as commentsActions from '../actions/comments';
 import * as API from '../utils/api';
 import PostDetailTable from './PostDetailTable';
 import CommentList from './CommentList';
@@ -20,9 +21,9 @@ class PostDetail extends Component {
   }
 
   componentDidMount () {
-    const { match, getComments } = this.props;
+    const { match, getCommentsByPost } = this.props;
     const postId = match.params.postId;
-    getComments(postId);
+    getCommentsByPost(postId);
     if(!this.state.post) {
       API.getPost(postId).then((response) => {
         if(response.id) {
@@ -74,15 +75,7 @@ function mapStateToProps ({ posts }) {
   return { posts };
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    deletePost: (id) => dispatch(postsActions.deletePost(id)),
-    getComments: (id) => dispatch(commentsActions.getCommentsByPost(id)),
-  }
-}
-
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { ...postsActions, ...commentsActions }
 )(PostDetail);

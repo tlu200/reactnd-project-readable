@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
-import { postsActions } from '../actions';
+import * as postsActions from '../actions/posts';
 import PostFrom from './PostForm';
 
 class NewPost extends Component {
@@ -44,13 +44,4 @@ class NewPost extends Component {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    addPost: (data) => dispatch(postsActions.addPost(data))
-  }
-}
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(NewPost);
+export default connect(null, postsActions)(NewPost);

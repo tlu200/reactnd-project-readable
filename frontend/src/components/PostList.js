@@ -4,7 +4,7 @@ import { Grid, Row, Button, Form, FormGroup, ControlLabel, FormControl } from 'r
 import PropTypes from 'prop-types';
 import { LinkContainer } from 'react-router-bootstrap';
 import sortBy from 'sort-by';
-import { appStateActions } from '../actions';
+import * as appStateActions from '../actions/appState';
 import Post from './Post';
 
 const sortByList = [{
@@ -85,13 +85,7 @@ function mapStateToProps ({ appState }) {
   return { appState };
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    setPostOrderBy: (postOrderBy) => dispatch(appStateActions.setPostOrderBy(postOrderBy)),
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  appStateActions
 )(PostList);

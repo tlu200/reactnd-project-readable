@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Row, Panel, Badge, Button, ButtonGroup, Glyphicon } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { LinkContainer } from 'react-router-bootstrap';
-import { postsActions } from '../actions';
+import * as postsActions from '../actions/posts';
 
 class Post extends Component {
   static propTypes = {
@@ -41,15 +41,4 @@ class Post extends Component {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    upVotePost: (id) => dispatch(postsActions.upVotePost(id)),
-    downVotePost: (id) => dispatch(postsActions.downVotePost(id))
-  }
-}
-
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(Post);
+export default connect(null, postsActions)(Post);

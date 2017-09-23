@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as API from '../utils/api';
-import { postsActions } from '../actions';
+import * as postsActions from '../actions/posts';
 import PostFrom from './PostForm';
 
 class EditPost extends Component {
@@ -91,13 +91,7 @@ function mapStateToProps ({ posts }) {
   return { posts };
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    editPost: (id, changes) => dispatch(postsActions.editPost(id, changes))
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  postsActions
 )(EditPost);

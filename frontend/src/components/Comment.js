@@ -1,17 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { appStateActions, commentsActions } from '../actions';
+import * as appStateActions from '../actions/appState';
+import * as commentsActions from '../actions/comments';
 import { ListGroupItem, Badge, ButtonGroup, Button, Glyphicon } from 'react-bootstrap';
 
 function Comment(props) {
-  const { comment, openModal, deleteComment, upVoteComment, downVoteComment } = props;
+  const { comment, openCommentModal, deleteComment, upVoteComment, downVoteComment } = props;
   return (
     <ListGroupItem>
       <div>
         <strong>{comment.author}:</strong> {comment.body}
         <Badge pullRight={true}>{comment.voteScore}</Badge>
         <ButtonGroup style={{float: 'right', marginRight: '10px'}}>
-          <Button bsSize="xsmall" onClick={() => openModal(comment)}>
+          <Button bsSize="xsmall" onClick={() => openCommentModal(comment)}>
             <Glyphicon glyph="edit" />
           </Button>
           <Button bsSize="xsmall" onClick={() => upVoteComment(comment.id)}>
@@ -29,16 +30,4 @@ function Comment(props) {
   );
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    openModal: (comment) => dispatch(appStateActions.openCommentModal(comment)),
-    deleteComment: (commentId) => dispatch(commentsActions.deleteComment(commentId)),
-    upVoteComment: (commentId) => dispatch(commentsActions.upVoteComment(commentId)),
-    downVoteComment: (commentId) => dispatch(commentsActions.downVoteComment(commentId))
-  }
-}
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(Comment);
+export default connect(null, { ...appStateActions, ...commentsActions })(Comment);

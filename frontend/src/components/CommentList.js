@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, ListGroup, Button } from 'react-bootstrap';
-import { appStateActions } from '../actions';
+import * as appStateActions from '../actions/appState';
 import Comment from './Comment';
 
 class CommentList extends Component {
@@ -31,14 +31,7 @@ function mapStateToProps ({ comments }) {
   return { comments };
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    openCommentModal: (comment) => dispatch(appStateActions.openCommentModal(comment)),
-  }
-}
-
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  appStateActions
 )(CommentList);

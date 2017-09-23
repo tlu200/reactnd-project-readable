@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { categoriesActions, postsActions } from '../actions';
+import * as categoriesActions from '../actions/categories';
+import * as postsActions from '../actions/posts';
 import NavigationBar from './NavigationBar';
 import DefaultPage from './DefaultPage';
 import CategoryView from './CategoryView';
@@ -41,14 +42,4 @@ class App extends Component {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    getCategories: () => dispatch(categoriesActions.getCategories()),
-    getPosts: () => dispatch(postsActions.getPosts()),
-  }
-}
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(App);
+export default connect(null, { ...categoriesActions, ...postsActions })(App);
