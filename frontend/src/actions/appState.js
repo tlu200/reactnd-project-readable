@@ -1,8 +1,10 @@
-export const SET_POST_ORDER_BY = "SET_POST_ORDER_BY";
-export const OPEN_COMMENT_MODAL = "OPEN_COMMENT_MODAL";
-export const CLOSE_COMMENT_MODAL = "CLOSE_COMMENT_MODAL";
-export const SET_COMMENT_FORM_AUTHOR = "SET_COMMENT_FORM_AUTHOR";
-export const SET_COMMENT_FORM_BODY = "SET_COMMENT_FORM_BODY";
+import {
+  SET_POST_ORDER_BY,
+  OPEN_COMMENT_MODAL,
+  CLOSE_COMMENT_MODAL,
+  SET_COMMENT_FORM_AUTHOR,
+  SET_COMMENT_FORM_BODY
+} from './types';
 
 export function setPostOrderBy (postOrderBy) {
   return {

@@ -1,5 +1,12 @@
 import { createReducer, updateItemInArray, updateObject } from './reducerUtilities';
-import { postsActions } from '../actions';
+import {
+  SET_POSTS,
+  ADD_POST,
+  EDIT_POST,
+  DELETE_POST,
+  UP_VOTE_POST,
+  DOWN_VOTE_POST
+} from '../actions/types';
 
 function setPosts (state, action) {
   return action.posts;
@@ -32,10 +39,10 @@ function downVotePost (state, action) {
 }
 
 export const postReducer = createReducer([], {
-  [postsActions.SET_POSTS]: setPosts,
-  [postsActions.ADD_POST]: addPost,
-  [postsActions.EDIT_POST]: editPost,
-  [postsActions.DELETE_POST]: deletePost,
-  [postsActions.UP_VOTE_POST]: upVotePost,
-  [postsActions.DOWN_VOTE_POST]: downVotePost
+  [SET_POSTS]: setPosts,
+  [ADD_POST]: addPost,
+  [EDIT_POST]: editPost,
+  [DELETE_POST]: deletePost,
+  [UP_VOTE_POST]: upVotePost,
+  [DOWN_VOTE_POST]: downVotePost
 });

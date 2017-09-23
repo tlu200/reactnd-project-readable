@@ -1,5 +1,5 @@
 import { createReducer } from './reducerUtilities';
-import { categoriesActions } from '../actions';
+import { SET_CATEGORIES } from '../actions/types';
 
 // Case reducer
 function setCategories (state, action) {
@@ -7,5 +7,5 @@ function setCategories (state, action) {
 }
 
 export const categoryReducer = createReducer([], {
-  [categoriesActions.SET_CATEGORIES]: setCategories
+  [SET_CATEGORIES]: setCategories
 });

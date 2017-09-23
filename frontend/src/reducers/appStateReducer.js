@@ -1,5 +1,11 @@
 import { createReducer, updateObject } from './reducerUtilities';
-import { appStateActions } from '../actions';
+import {
+  SET_POST_ORDER_BY,
+  OPEN_COMMENT_MODAL,
+  CLOSE_COMMENT_MODAL,
+  SET_COMMENT_FORM_AUTHOR,
+  SET_COMMENT_FORM_BODY
+} from '../actions/types';
 
 const initialState = {
   postOrderBy: 'timestamp',
@@ -44,9 +50,9 @@ function setCommentFormBody (state, action) {
 }
 
 export const appStateReducer = createReducer(initialState, {
-  [appStateActions.SET_POST_ORDER_BY]: setPostOrderBy,
-  [appStateActions.OPEN_COMMENT_MODAL]: openCommentModal,
-  [appStateActions.CLOSE_COMMENT_MODAL]: closeCommentModal,
-  [appStateActions.SET_COMMENT_FORM_AUTHOR]: setCommentFormAuthor,
-  [appStateActions.SET_COMMENT_FORM_BODY]: setCommentFormBody
+  [SET_POST_ORDER_BY]: setPostOrderBy,
+  [OPEN_COMMENT_MODAL]: openCommentModal,
+  [CLOSE_COMMENT_MODAL]: closeCommentModal,
+  [SET_COMMENT_FORM_AUTHOR]: setCommentFormAuthor,
+  [SET_COMMENT_FORM_BODY]: setCommentFormBody
 });

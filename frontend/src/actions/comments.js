@@ -1,11 +1,5 @@
 import * as API from '../utils/api';
-
-export const SET_COMMENTS = "SET_COMMENTS";
-export const ADD_COMMENT = "ADD_COMMENT";
-export const EDIT_COMMENT = "EDIT_COMMENT";
-export const DELETE_COMMENT = "DELETE_COMMENT";
-export const UP_VOTE_COMMENT = "UP_VOTE_COMMENT";
-export const DOWN_VOTE_COMMENT = "DOWN_VOTE_COMMENT";
+import { SET_COMMENTS, ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT, UP_VOTE_COMMENT, DOWN_VOTE_COMMENT } from './types';
 
 export function getCommentsByPost (postId) {
   return dispatch => (

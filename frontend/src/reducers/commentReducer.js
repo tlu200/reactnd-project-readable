@@ -1,5 +1,12 @@
 import { createReducer, updateItemInArray, updateObject } from './reducerUtilities';
-import { commentsActions } from '../actions';
+import {
+  SET_COMMENTS,
+  ADD_COMMENT,
+  EDIT_COMMENT,
+  DELETE_COMMENT,
+  UP_VOTE_COMMENT,
+  DOWN_VOTE_COMMENT
+} from '../actions/types';
 
 function setComments (state, action) {
   return action.comments;
@@ -32,10 +39,10 @@ function downVoteComment (state, action) {
 }
 
 export const commentReducer = createReducer([], {
-  [commentsActions.SET_COMMENTS]: setComments,
-  [commentsActions.ADD_COMMENT]: addComment,
-  [commentsActions.EDIT_COMMENT]: editComment,
-  [commentsActions.DELETE_COMMENT]: deleteComment,
-  [commentsActions.UP_VOTE_COMMENT]: upVoteComment,
-  [commentsActions.DOWN_VOTE_COMMENT]: downVoteComment
+  [SET_COMMENTS]: setComments,
+  [ADD_COMMENT]: addComment,
+  [EDIT_COMMENT]: editComment,
+  [DELETE_COMMENT]: deleteComment,
+  [UP_VOTE_COMMENT]: upVoteComment,
+  [DOWN_VOTE_COMMENT]: downVoteComment
 });
